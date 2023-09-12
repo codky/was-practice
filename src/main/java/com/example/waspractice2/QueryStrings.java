@@ -19,4 +19,12 @@ public class QueryStrings {
                     queryStrings.add(new QueryString(values[0], values[1]));
                 });
     }
+
+    public String getValue(String key) {
+       return this.queryStrings.stream()
+                .filter(queryString -> queryString.exists(key)) // key 가 존재하면
+                .map(QueryString::getValue) // value 를 주세요
+                .findFirst()
+                .orElse(null);
+    }
 }
